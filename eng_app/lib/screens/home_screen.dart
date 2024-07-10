@@ -1,8 +1,17 @@
 import 'package:eng_app/screens/course_screen.dart';
 import 'package:flutter/material.dart';
+import '../widget/app_fader_effect.dart';
+import '../widget/bnb.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _atBottom = false;
   //Tạo dữ liệu tĩnh cho mảng danh sách các mục
+  int currentPageIndex = 0;
 
   List catNames = [
     "Từ vựng",
@@ -11,8 +20,8 @@ class HomeScreen extends StatelessWidget {
     "Luyện viết",
     "Luyện đọc",
     "Kiểm tra",
-  ]; //Danh sách tạm thời, sẽ thay đổi sau tùy theo mục đích cuối
-
+  ];
+ //Danh sách tạm thời, sẽ thay đổi sau tùy theo mục đích cuối
   List<Color> catColors = [
     Colors.yellow,
     Colors.green,
@@ -29,8 +38,8 @@ class HomeScreen extends StatelessWidget {
     Icon(Icons.assessment_outlined, color: Colors.white, size: 30),
     Icon(Icons.category_rounded, color: Colors.white, size: 30),
     Icon(Icons.assessment_rounded, color: Colors.white, size: 30),
-  ]; //Icon tạm thời cho đến khi chốt nội dung danh sách cũng như tìm được icon phù hợp
-
+  ];
+ //Icon tạm thời cho đến khi chốt nội dung danh sách cũng như tìm được icon phù hợp
   List imgList = [
     '360 động từ bất quy tắc',
     'Đại từ quan hệ',
@@ -233,31 +242,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-        iconSize: 25,
-        selectedItemColor: Color.fromARGB(255, 21, 33, 255),
-        selectedFontSize: 15,
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Trang chủ",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: "Từ Điển",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book_online),
-            label: "Dịch Văn Bản",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Cá nhân",
-          ),
-        ],
-      ),
+      bottomNavigationBar: AppBBN(atBottom: _atBottom),
     );
   }
 }
