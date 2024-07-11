@@ -96,7 +96,7 @@ class DetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Từ Điển"),
+        title: Text(word),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
