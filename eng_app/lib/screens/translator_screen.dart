@@ -77,10 +77,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     ),
                     Icon(Icons.arrow_forward_rounded),
                     DropdownButton<String>(
-                      value: inputLanguage,
+                      value: outputLanguage,
                       onChanged: (newValue) {
                         setState(() {
-                          inputLanguage = newValue!;
+                          outputLanguage = newValue!;
                         });
                       },
                       items: <String>[
