@@ -28,9 +28,11 @@ class AppBBN extends StatelessWidget {
             Navigator.pushNamed(context, "/Setting");
             break;
           case 2:
-
+          Navigator.pushNamed(context, "/Translator");
+            break;
           case 3:
-
+            Navigator.pushNamed(context, "/Dictionary");
+            break;
           case 4:
             Navigator.pushNamed(context, "/Homepage");
             break;

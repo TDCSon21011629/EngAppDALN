@@ -10,6 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:eng_app/screens/welcome_screen.dart';
 import 'package:eng_app/config/app_theme.dart';
+import 'package:eng_app/screens/translator_screen.dart';
+import 'package:eng_app/screens/dictionary_screen.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +49,8 @@ class MyApp extends StatelessWidget {
         routes: {
           "/Homepage":(context) => HomeScreen(),
           "/Setting" :(context) => Setting(),
-
+          "/Translator" :(context) => TranslatorScreen(),
+          "/Dictionary" :(context) => DictionaryScreen(),
         },
 
     );
