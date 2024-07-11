@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714749532013",
+    "project_id": "english-vocabulary-f7a77",
+    "storage_bucket": "english-vocabulary-f7a77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714749532013:android:175644c4d9e4237d6cac64",
+        "android_client_info": {
+          "package_name": "com.example.eng_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_I8LTksveghTmTCDbAB8YHX8j0MCIryI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

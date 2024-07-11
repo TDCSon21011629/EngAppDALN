@@ -40,7 +40,14 @@ dependencies:
   shimmer: ^3.0.0
   flutter_animate: ^4.5.0
   flex_color_scheme: ^7.3.1
-  
+  firebase_core: ^2.31.0
+  cloud_firestore: ^4.17.4
+  firebase_storage: ^11.7.6
+  image_picker: ^1.1.1
+  firebase_auth: ^4.19.6
+  google_sign_in: ^6.2.1
+  firebase_database: ^10.5.7
+  shared_preferences: ^2.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

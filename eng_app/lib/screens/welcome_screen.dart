@@ -1,4 +1,5 @@
 import 'package:eng_app/screens/home_screen.dart';
+import 'package:eng_app/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -88,7 +89,7 @@ class WelcomeScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => LoginScreen(),
                             ));
                           },
                           child: Container(

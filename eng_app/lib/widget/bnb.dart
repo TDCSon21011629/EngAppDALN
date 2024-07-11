@@ -22,7 +22,7 @@ class AppBBN extends StatelessWidget {
         // Xử lý chuyển hướng tại đây
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, "/Homepage");
+
             break;
           case 1:
             Navigator.pushNamed(context, "/Setting");
@@ -32,7 +32,7 @@ class AppBBN extends StatelessWidget {
           case 3:
 
           case 4:
-
+            Navigator.pushNamed(context, "/Homepage");
             break;
         }
       },
