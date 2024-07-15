@@ -76,7 +76,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: AppBBN(atBottom: _atBottom),
+
     );
   }
 }

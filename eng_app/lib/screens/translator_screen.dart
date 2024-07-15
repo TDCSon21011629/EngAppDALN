@@ -123,7 +123,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: AppBBN(atBottom: _atBottom),
+
     );
   }
 }

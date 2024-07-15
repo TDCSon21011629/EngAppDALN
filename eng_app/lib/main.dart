@@ -1,17 +1,16 @@
 import 'dart:io';
-
+import 'package:eng_app/screens/main_page.dart';
+import 'package:eng_app/screens/translator_screen.dart';
 import 'package:eng_app/screens/Setting.dart';
-import 'package:eng_app/screens/course_screen.dart';
-import 'package:eng_app/screens/home_login_screen.dart';
 import 'package:eng_app/screens/home_screen.dart';
 import 'package:eng_app/screens/login.dart';
+import 'package:eng_app/screens/search_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:eng_app/screens/welcome_screen.dart';
 import 'package:eng_app/config/app_theme.dart';
-import 'package:eng_app/screens/translator_screen.dart';
-import 'package:eng_app/screens/dictionary_screen.dart';
+
+
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +27,7 @@ Future<void> main() async{
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context,snapshot) {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return mainPage();
             }else {
               return LoginScreen();
             }
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           "/Homepage":(context) => HomeScreen(),
           "/Setting" :(context) => Setting(),
           "/Translator" :(context) => TranslatorScreen(),
-          "/Dictionary" :(context) => DictionaryScreen(),
+          "/Dictionary" :(context) => SearchPage(),
         },
 
     );

@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   bool _atBottom = false;
   //Tạo dữ liệu tĩnh cho mảng danh sách các mục
   int currentPageIndex = 0;
@@ -242,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: AppBBN(atBottom: _atBottom),
+
     );
   }
 }

@@ -4,106 +4,83 @@ import 'package:navigation_view/item_navigation_view.dart';
 import 'package:navigation_view/navigation_view.dart';
 import '../main.dart';
 
-class AppBBN extends StatelessWidget {
+class AppBBN extends StatefulWidget {
   const AppBBN({
-    super.key,
-    required bool atBottom,
-  }) : _atBottom = atBottom;
+    Key? key,
+    required this.atBottom,
+    required this.onTap,
+  }) : super(key: key);
 
-  final bool _atBottom;
+  final bool atBottom;
+  final Function(int) onTap;
+
+  @override
+  _AppBBNState createState() => _AppBBNState();
+}
+
+class _AppBBNState extends State<AppBBN> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    widget.onTap(index);
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     return NavigationView(
-      onChangePage: (index) {
-        print('onChangePage called with index: $index');
-        // Xử lý chuyển hướng tại đây
-        switch (index) {
-          case 0:
-
-            break;
-          case 1:
-            Navigator.pushNamed(context, "/Setting");
-            break;
-          case 2:
-          Navigator.pushNamed(context, "/Translator");
-            break;
-          case 3:
-            Navigator.pushNamed(context, "/Dictionary");
-            break;
-          case 4:
-            Navigator.pushNamed(context, "/Homepage");
-            break;
-        }
-      },
+      onChangePage: _onItemTapped,
       curve: Curves.fastEaseInToSlowEaseOut,
       durationAnimation: const Duration(milliseconds: 400),
       backgroundColor: theme.scaffoldBackgroundColor,
       borderTopColor: Theme.of(context).brightness == Brightness.light
-          ? _atBottom
+          ? widget.atBottom
           ? theme.primaryColor
           : null
           : null,
       color: theme.primaryColor,
       items: [
-        ItemNavigationView(
-            childAfter: Icon(
-              IconlyBold.profile,
-              color: theme.primaryColor,
-              size: 35,
-            ),
-            childBefore: Icon(
-              IconlyBroken.profile,
-              color: theme.dialogBackgroundColor,
-              size: 30,
-            )),
-        ItemNavigationView(
-            childAfter: Icon(
-              IconlyBold.setting,
-              color: theme.primaryColor,
-              size: 35,
-            ),
-            childBefore: Icon(
-              IconlyBroken.setting,
-              color: theme.dialogBackgroundColor,
-              size: 30,
-            )),
-        ItemNavigationView(
-            childAfter: Icon(
-              IconlyBold.buy,
-              color: theme.primaryColor,
-              size: 35,
-            ),
-            childBefore: Icon(
-              IconlyBroken.buy,
-              color: theme.dialogBackgroundColor,
-              size: 30,
-            )),
-        ItemNavigationView(
-            childAfter: Icon(
-              IconlyBold.category,
-              color: theme.primaryColor,
-              size: 35,
-            ),
-            childBefore: Icon(
-              IconlyBroken.category,
-              color: theme.dialogBackgroundColor,
-              size: 30,
-            )),
-        ItemNavigationView(
-            childAfter: Icon(
-              IconlyBold.home,
-              color: theme.primaryColor,
-              size: 35,
-            ),
-            childBefore: Icon(
-              IconlyBroken.home,
-              color: theme.dialogBackgroundColor,
-              size: 30,
-            )),
+        _buildNavigationItem(IconlyBold.profile, IconlyBroken.profile, "Profile", 0),
+        _buildNavigationItem(IconlyBold.setting, IconlyBroken.setting, "Settings", 1),
+        _buildNavigationItem(IconlyBold.buy, IconlyBroken.buy, "Buy", 2),
+        _buildNavigationItem(IconlyBold.category, IconlyBroken.category, "Category", 3),
+        _buildNavigationItem(IconlyBold.home, IconlyBroken.home, "Home", 4),
       ],
+    );
+  }
+
+  ItemNavigationView _buildNavigationItem(IconData iconAfter, IconData iconBefore, String label, int index) {
+    final ThemeData theme = Theme.of(context);
+    final bool isSelected = _selectedIndex == index;
+
+    return ItemNavigationView(
+      childAfter: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            iconAfter,
+            color: isSelected ? theme.primaryColor : theme.dialogBackgroundColor,
+            size: isSelected ? 35 : 30,
+          ),
+          if (isSelected)
+            Text(
+              label,
+              style: TextStyle(
+                color: theme.primaryColor,
+                fontSize: 12,
+              ),
+            ),
+        ],
+      ),
+      childBefore: Icon(
+        iconBefore,
+        color: isSelected ? theme.primaryColor : theme.dialogBackgroundColor,
+        size: isSelected ? 30 : 25,
+      ),
     );
   }
 }

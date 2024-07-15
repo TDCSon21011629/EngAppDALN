@@ -1,3 +1,4 @@
+import 'package:eng_app/screens/main_page.dart';
 import 'package:flutter/material.dart';
 import '../Widget/Login/button.dart';
 import '../services/google_auth.dart';
@@ -45,7 +46,7 @@ class _SignupScreenState extends State<LoginScreen> {
       //navigate to the home screen
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) =>  HomeScreen(),
+          builder: (context) =>  mainPage(),
         ),
       );
     } else {
@@ -71,14 +72,14 @@ class _SignupScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: height / 2.7,
-                  child: Image.asset('images/logo1.jpg')
+                    height: height / 2.7,
+                    child: Image.asset('images/logo1.jpg')
                 ),
                 TextFieldInput(
                     icon: Icons.person,
                     textEditingController: emailController,
                     hintText: 'Enter your email',
-                    textInputType: TextInputType.text),
+                    textInputType: TextInputType.text,),
                 TextFieldInput(
                   icon: Icons.lock,
                   textEditingController: passwordController,
@@ -112,7 +113,7 @@ class _SignupScreenState extends State<LoginScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  HomeScreen1(),
+                          builder: (context) =>  mainPage(),
                         ),
                       );
                     },
