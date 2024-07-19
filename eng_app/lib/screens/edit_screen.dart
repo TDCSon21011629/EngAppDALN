@@ -85,7 +85,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           var downloadUrl = await (await task).ref.getDownloadURL();
           imageUrl = downloadUrl;
         } else if (_imageUrl != null) {
-          // Nếu không có ảnh mới, giữ nguyên imageUrl hiện tại
+
           imageUrl = _imageUrl;
         }
 

@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:eng_app/Admin/add_quiz.dart';
 import 'package:eng_app/pages/home.dart';
+import 'package:eng_app/screens/HomePage.dart';
 import 'package:eng_app/screens/account_screen.dart';
 import 'package:eng_app/screens/search_page.dart';
 import 'package:eng_app/screens/translator_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../config/app_theme.dart';
 import '../widget/bnb.dart';
 import 'Setting.dart';
-import 'home_screen.dart';
+
 
 class mainPage extends StatefulWidget {
   const mainPage({super.key});

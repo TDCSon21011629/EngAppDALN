@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:eng_app/screens/main_page.dart';
 import 'package:eng_app/screens/translator_screen.dart';
 import 'package:eng_app/screens/Setting.dart';
-import 'package:eng_app/screens/home_screen.dart';
+
 import 'package:eng_app/screens/login.dart';
 import 'package:eng_app/screens/search_page.dart';
 import 'package:eng_app/config/app_theme.dart';
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-        '/Homepage': (context) => HomeScreen(),
+        //'/Homepage': (context) => HomeScreen(),
         '/Setting': (context) => Setting(),
         '/Translator': (context) => TranslatorScreen(),
         '/Dictionary': (context) => SearchPage(),
