@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../services/api.dart';
 import '../config/response_model.dart';
 import '../widget/bnb.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -15,6 +18,27 @@ class _SearchPage extends State<SearchPage> {
   bool inProgress = false;
   ResponseModel? responseModel;
   String noDataText = "Welcome, Start searching";
+  final FlutterTts flutterTts = FlutterTts();
+  final StreamController<bool> _inProgressController = StreamController<bool>();
+  String? searchQuery;
+
+  @override
+  void initState() {
+    super.initState();
+    _initTts();
+  }
+
+  void _initTts() {
+    flutterTts.setStartHandler(() {
+      _inProgressController.add(true);
+    });
+    flutterTts.setCompletionHandler(() {
+      _inProgressController.add(false);
+    });
+    flutterTts.setErrorHandler((msg) {
+      _inProgressController.add(false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +80,24 @@ class _SearchPage extends State<SearchPage> {
             fontSize: 22,
           ),
         ),
+
         Text(responseModel!.phonetic ?? ""),
+        Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.volume_up),
+              onPressed: () {
+                _speak(searchQuery!);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.favorite_border),
+              onPressed: () {
+                //_addWordToQuiz(responseModel!);
+              },
+            ),
+          ],
+        ),
         const SizedBox(height: 16),
         Expanded(
             child: ListView.builder(
@@ -144,6 +185,9 @@ class _SearchPage extends State<SearchPage> {
     return SearchBar(
       hintText: "Search word here",
       onSubmitted: (value) {
+        setState(() {
+          searchQuery = value;
+        });
         _getMeaningFromApi(value);
       },
     );
@@ -159,11 +203,43 @@ class _SearchPage extends State<SearchPage> {
       setState(() {});
     } catch (e) {
       responseModel = null;
-      noDataText = "Meaning cannot be fetched";
+      noDataText = "Không có dữ liệu";
     } finally {
       setState(() {
         inProgress = false;
       });
     }
   }
+
+  void _speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.speak(text);
+  }
+
+  /*void _addWordToQuiz(ResponseModel responseModel) {
+    // Lấy định nghĩa (meaning) từ responseModel
+    String correctAnswer = responseModel.meanings![0].definitions![0].definition!;
+
+    // Lấy 3 từ tiếng Việt ngẫu nhiên (bạn cần tự triển khai hàm này)
+    List<String> otherOptions = _getRandomVietnameseWords(3);
+
+    // Tạo câu hỏi và thêm vào cơ sở dữ liệu (bạn cần tự triển khai)
+    String question = responseModel.word!;
+    List<String> allOptions = [correctAnswer, ...otherOptions];
+    allOptions.shuffle();
+
+    // Tạo map chứa câu hỏi và các đáp án
+    Map<String, dynamic> quizQuestion = {
+      'question': question,
+      'options': allOptions,
+      'correctAnswer': correctAnswer
+    };
+
+    // Gọi hàm thêm câu hỏi vào Firebase (bạn cần tự triển khai hàm này)
+    DatabaseMethods().addQuizQuestionToCategory(quizQuestion, "Yêu thích"); // Ví dụ: thêm vào danh mục "Yêu thích"
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Đã thêm từ vào câu hỏi!')),
+    );
+  }*/
 }

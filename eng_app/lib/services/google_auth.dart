@@ -1,18 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
-FirebaseAuth auth = FirebaseAuth.instance;
-GoogleSignIn googleSignIn = GoogleSignIn();
-
 class FirebaseServices {
-  final auth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn();
-  // dont't gorget to add firebasea auth and google sign in package
-  signInWithGoogle() async {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  // Sign in with Google
+  Future<User?> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
@@ -20,16 +16,24 @@ class FirebaseServices {
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
-        await auth.signInWithCredential(authCredential);
+        UserCredential userCredential = await auth.signInWithCredential(authCredential);
+        return userCredential.user;
+      } else {
+        print("Google sign-in was aborted by the user.");
+        return null;
       }
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
+      print("FirebaseAuthException: ${e.message}");
+      return null;
+    } catch (e) {
+      print("General Exception: ${e.toString()}");
+      return null;
     }
   }
 
-// for sign out
-  googleSignOut() async {
+  // Sign out
+  Future<void> googleSignOut() async {
     await googleSignIn.signOut();
-    auth.signOut();
+    await auth.signOut();
   }
 }

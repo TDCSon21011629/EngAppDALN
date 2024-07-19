@@ -19,7 +19,7 @@ class AppBBN extends StatefulWidget {
 }
 
 class _AppBBNState extends State<AppBBN> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -44,10 +44,10 @@ class _AppBBNState extends State<AppBBN> {
           : null,
       color: theme.primaryColor,
       items: [
-        _buildNavigationItem(IconlyBold.profile, IconlyBroken.profile, "Profile", 0),
-        _buildNavigationItem(IconlyBold.setting, IconlyBroken.setting, "Settings", 1),
-        _buildNavigationItem(IconlyBold.buy, IconlyBroken.buy, "Buy", 2),
-        _buildNavigationItem(IconlyBold.category, IconlyBroken.category, "Category", 3),
+        _buildNavigationItem(IconlyBold.setting, IconlyBroken.setting, "Settings", 0),
+        _buildNavigationItem(IconlyBold.bookmark, IconlyBroken.bookmark, "Quiz", 1),
+        _buildNavigationItem(IconlyBold.chat, IconlyBroken.chat, "Dịch", 2),
+        _buildNavigationItem(IconlyBold.search, IconlyBroken.search, "Tìm kiếm", 3),
         _buildNavigationItem(IconlyBold.home, IconlyBroken.home, "Home", 4),
       ],
     );

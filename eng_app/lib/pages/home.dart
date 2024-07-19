@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../Admin/add_quiz.dart';
 import '../pages/question.dart';
 import '../services/database.dart';
 
@@ -26,28 +27,20 @@ class _HomeState extends State<Home> {
                   height: 220,
                   padding: EdgeInsets.only(left: 20.0, top: 50.0),
                   decoration: BoxDecoration(
-                      color: Color(0xFF2a2b31),
+                      color: Color(0xff5e76ff),
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20))),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(60),
-                          child: Image.asset(
-                            "images/boy.jpg",
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.cover,
-                          )),
                       SizedBox(
                         width: 20.0,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Text(
-                          "Shivam Gupta",
+                          "Quizz English",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 22.0,
@@ -100,48 +93,62 @@ class _HomeState extends State<Home> {
                 height: 30.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "Top Quiz Categories",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 23.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 20.0,),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildCategoryCard(context, "Place", "images/place.png"),
-                    buildCategoryCard(context, "Animals", "images/dog.png"),
+                    Text(
+                      "Top Quiz Categories",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 23.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddQuiz()),
+                        );
+                      },
+                      child: Text("Create Quiz"),
+                    ),
                   ],
                 ),
               ),
               SizedBox(height: 20.0,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    buildCategoryCard(context, "Fruits", "images/fruit.png"),
-                    buildCategoryCard(context, "Objects", "images/object.png"),
+                    buildCategoryCard(context, "Cấp 1", "images/cap1.jpg"),
+                    buildCategoryCard(context, "Cấp 2", "images/cap2.png"),
                   ],
                 ),
               ),
               SizedBox(height: 20.0,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    buildCategoryCard(context, "Sports", "images/sports.png"),
+                    buildCategoryCard(context, "Cấp 3", "images/cap3.jpg"),
+                    buildCategoryCard(context, "Đại học", "images/Daihoc.jpg"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.0,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildCategoryCard(context, "Yêu thích", "images/favorites.jpg"),
                     buildCategoryCard(context, "Random", "images/random.png"),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

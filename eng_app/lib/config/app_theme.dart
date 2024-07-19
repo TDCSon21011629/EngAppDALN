@@ -10,7 +10,7 @@ class AppTheme {
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     swapLegacyOnMaterial3: false,
     useMaterial3: true,
-    scheme: FlexScheme.red,
+    scheme: FlexScheme.blueM3,
     surfaceTint: Colors.transparent,
     textTheme: const TextTheme(),
     dialogBackground: const Color.fromARGB(255, 174, 174, 174),

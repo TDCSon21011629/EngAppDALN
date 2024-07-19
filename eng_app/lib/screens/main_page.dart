@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:eng_app/Admin/add_quiz.dart';
 import 'package:eng_app/pages/home.dart';
+import 'package:eng_app/screens/account_screen.dart';
 import 'package:eng_app/screens/search_page.dart';
 import 'package:eng_app/screens/translator_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,10 +21,10 @@ class mainPage extends StatefulWidget {
 }
 
 class _mainPageState extends State<mainPage> {
-   final ValueNotifier<int> _currentPageIndex = ValueNotifier<int>(3);
+   final ValueNotifier<int> _currentPageIndex = ValueNotifier<int>(4);
    final List<Widget> _pages = [
+     AccountScreen(),
      Home(),
-     Setting(),
      TranslatorScreen(),
      SearchPage(),
      HomeScreen(),
