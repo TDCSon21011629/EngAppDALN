@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../services/api.dart';
 import '../config/response_model.dart';
 import '../widget/bnb.dart';
+import 'package:eng_app/main.dart';
+import '../widget/app_fader_effect.dart';
+
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -12,6 +15,8 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPage extends State<SearchPage> {
   bool _atBottom = false;
+  int currentPageIndex = 1;
+  
   bool inProgress = false;
   ResponseModel? responseModel;
   String noDataText = "Welcome, Start searching";
@@ -38,7 +43,7 @@ class _SearchPage extends State<SearchPage> {
                 ],
               ),
             ),
-
+            bottomNavigationBar: AppBBN(atBottom: _atBottom),
           )),
     );
   }
