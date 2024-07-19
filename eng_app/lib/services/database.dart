@@ -9,7 +9,7 @@ class DatabaseMethods {
         .add(userQuizCategory);
   }
 
-  Future <Stream<QuerySnapshot>> getCategoryQuiz(String category)async{
+  Future<Stream<QuerySnapshot>> getCategoryQuiz(String category) async {
     return await FirebaseFirestore.instance.collection(category).snapshots();
   }
 
@@ -47,5 +47,77 @@ class DatabaseMethods {
   Future<bool> hasUserData(String userId) async {
     DocumentSnapshot? snapshot = await getUserData(userId);
     return snapshot != null && snapshot.exists;
+  }
+
+  // Lấy danh sách từ yêu thích của người dùng
+  Future<List<Map<String, dynamic>>> getUserFavorites(String userId) async {
+    try {
+      DocumentSnapshot<Object?>? snapshot = await getUserData(userId);
+      if (snapshot != null && snapshot.exists) {
+        Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
+        if (userData.containsKey('favorites')) {
+          List<dynamic> favorites = userData['favorites'];
+          return favorites.cast<Map<String, dynamic>>();
+        }
+      }
+      return [];
+    } catch (e) {
+      print('Error getting user favorites: $e');
+      return [];
+    }
+  }
+
+  // Thêm từ vào danh sách yêu thích của người dùng
+  Future<void> addUserFavorite(String userId, Map<String, dynamic> word) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        DocumentSnapshot<Object?>? snapshot = await getUserData(userId);
+        List<Map<String, dynamic>> favorites = [];
+        if (snapshot != null && snapshot.exists) {
+          Map<String, dynamic> userData =
+          snapshot.data() as Map<String, dynamic>;
+          if (userData.containsKey('favorites')) {
+            List<dynamic> favs = userData['favorites'];
+            favorites = favs.cast<Map<String, dynamic>>();
+          }
+        }
+        favorites.add(word);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .update({'favorites': favorites});
+        print('Favorite word added successfully!');
+      } catch (e) {
+        print('Error adding favorite word: $e');
+      }
+    }
+  }
+
+  // Xóa từ khỏi danh sách yêu thích của người dùng
+  Future<void> removeUserFavorite(String userId, String word) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        DocumentSnapshot<Object?>? snapshot = await getUserData(userId);
+        List<Map<String, dynamic>> favorites = [];
+        if (snapshot != null && snapshot.exists) {
+          Map<String, dynamic> userData =
+          snapshot.data() as Map<String, dynamic>;
+          if (userData.containsKey('favorites')) {
+            List<dynamic> favs = userData['favorites'];
+            favorites = favs.cast<Map<String, dynamic>>();
+          }
+        }
+        favorites.removeWhere((item) => item['word'] == word);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .update({'favorites': favorites});
+        print('Favorite word removed successfully!');
+      } catch (e) {
+        print('Error removing favorite word: $e');
+      }
+    }
   }
 }
